@@ -24,21 +24,24 @@
 	<bean id="jasonSax" class="concursantes.Musico">
 		<property name="cancion" value="Equinox" /> <!-- bean interno (inner bean) -->
 		<property name="instrumento">
-			<bean class="concursantes.Saxofon"  />
+			<bean class="concursantes.Saxofon" />
 		</property>
 	</bean>
 
 
 	<!-- configuracion de AOP -->
-	<aop:config><!-- se habilita el namespace aop, se agrega aop:config que permite configurar varios aspectos-->
-		<aop:aspect ref="audiencia"><!-- se define es aspecto con nombre audiencia en la clase audciencia tiene anotacion @Component-->
+	<!-- <aop:config> <aop:aspect ref="audiencia"> <aop:pointcut expression="execution(* 
+		concursantes.Concursante.ejecutar(..))" id="show" /> <aop:before pointcut-ref="show" 
+		method="sentarse" /> <aop:before pointcut-ref="show" method="apagarCelulares" 
+		/> <aop:after-returning pointcut-ref="show" method="aplaudir" /> <aop:after-throwing 
+		pointcut-ref="show" method="devolucion" /> </aop:aspect> </aop:config> -->
+
+	<!-- configuracion de AOP con Aspect Around -->
+	<aop:config>
+		<aop:aspect ref="audiencia">
 			<aop:pointcut expression="execution(* concursantes.Concursante.ejecutar(..))"
-				id="show" /><!-- se define el point cut, especifica cual es el metodo a monitorear concursantes.Concursante.ejecutar(..)-->
-			
-			<aop:before pointcut-ref="show" method="sentarse" /><!-- se ejecuta antes del metodo especificado method(nombre del metodo a ejecutar)-->
-			<aop:before pointcut-ref="show" method="apagarCelulares" /><!-- se ejecuta antes del metodo especificado-->
-			<aop:after-returning pointcut-ref="show" method="aplaudir" /><!-- se ejecuta despues del metodo-->
-			<aop:after-throwing pointcut-ref="show" method="devolucion" /><!-- se ejecuta si arroja alguna excetion-->
+				id="show" />
+			<aop:around pointcut-ref="show" method="monitorearShow" />
 		</aop:aspect>
 	</aop:config>
 
