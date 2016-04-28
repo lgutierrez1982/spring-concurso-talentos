@@ -9,6 +9,8 @@
 
 
 	<context:component-scan base-package="concursantes" />
+	
+	<aop:aspectj-autoproxy/><!--  esto indica que los aspectos se van a manejar mediante anotaciones -->
 
 
 	<!-- <bean id="solei" class="concursantes.Malabarista"> <constructor-arg 
@@ -37,6 +39,7 @@
 		pointcut-ref="show" method="devolucion" /> </aop:aspect> </aop:config> -->
 
 	<!-- configuracion de AOP con Aspect Around -->
+	<!--  
 	<aop:config>
 		<aop:aspect ref="audiencia">
 			<aop:pointcut expression="execution(* concursantes.Concursante.ejecutar(..))"
@@ -44,5 +47,6 @@
 			<aop:around pointcut-ref="show" method="monitorearShow" />
 		</aop:aspect>
 	</aop:config>
-
+	-->
+	
 </beans>
